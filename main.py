@@ -39,8 +39,7 @@ def main_menu():
         print("\n===== Console Application =====")
         print("1. CRUD Operations")
         print("2. Advanced Operations")
-        print("3. Preferences/Settings")
-        print("4. Exit")
+        print("3. Exit")
         choice = input("Enter your choice: ")
 
         if choice == "1":
@@ -162,19 +161,19 @@ def set_operations_menu(table_name):
             # Perform Union
             print("\nPerforming Union Operation:")
             second_table = input("Enter the name of the second table for Union: ")
-            perform_union(db_connection, table_name, second_table)
+            print(perform_union(db_connection, table_name, second_table))
         
         elif choice == "2":
             # Perform Intersection
             print("\nPerforming Intersection Operation:")
             second_table = input("Enter the name of the second table for Intersection: ")
-            perform_intersect(db_connection, table_name, second_table)
+            print(perform_intersect(db_connection, table_name, second_table))
         
         elif choice == "3":
             # Perform Difference
             print("\nPerforming Difference Operation:")
             second_table = input("Enter the name of the second table for Difference: ")
-            perform_except(db_connection, table_name, second_table)
+            print(perform_except(db_connection, table_name, second_table))
         
         elif choice == "4":
             advanced_operations_menu(table_name)
