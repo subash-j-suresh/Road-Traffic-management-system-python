@@ -162,19 +162,19 @@ def set_operations_menu(table_name):
             # Perform Union
             print("\nPerforming Union Operation:")
             second_table = input("Enter the name of the second table for Union: ")
-            perform_union(table_name, second_table)
+            perform_union(db_connection, table_name, second_table)
         
         elif choice == "2":
             # Perform Intersection
             print("\nPerforming Intersection Operation:")
             second_table = input("Enter the name of the second table for Intersection: ")
-            perform_intersect(table_name, second_table)
+            perform_intersect(db_connection, table_name, second_table)
         
         elif choice == "3":
             # Perform Difference
             print("\nPerforming Difference Operation:")
             second_table = input("Enter the name of the second table for Difference: ")
-            perform_except(table_name, second_table)
+            perform_except(db_connection, table_name, second_table)
         
         elif choice == "4":
             advanced_operations_menu(table_name)
@@ -183,7 +183,7 @@ def set_operations_menu(table_name):
         else:
             print("Invalid choice. Please select a valid option.")
 
-def set_membership_menu(table_name, connection):
+def set_membership_menu(table_name):
     while True:
         print("\n===== Set Membership Menu =====")
         print("1. IN Membership Check")
@@ -196,14 +196,14 @@ def set_membership_menu(table_name, connection):
             print("\nPerforming IN Membership Check:")
             column = input("Enter the column to check: ")
             value = input("Enter the value to check: ")
-            records = check_in_membership(connection, table_name, column, value)
+            records = check_in_membership(db_connection, table_name, column, value)
             print(records)  # Display or process the membership check results as needed
         
         elif choice == "2":
             # EXISTS Membership Check
             print("\nPerforming EXISTS Membership Check:")
             condition = input("Enter the condition to check: ")
-            records = check_exists_membership(connection, table_name, condition)
+            records = check_exists_membership(db_connection, table_name, condition)
             print(records)  # Display or process the membership check results as needed
         
         elif choice == "3":
