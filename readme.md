@@ -35,7 +35,6 @@ This repository contains a console-based application that facilitates a range of
   - **Set Comparisons:** Less Than, Greater Than, Equal To comparisons between tables.
   - **Subqueries with WITH Clause:** Advanced subquery functionalities.
   - **Advanced Aggregate Functions:** Aggregate functions beyond the basics.
-  - **OLAP Functions:** Provides advanced analytics capabilities.
 
 ## Setup
 

@@ -148,9 +148,7 @@ def advanced_operations_menu():
 
 def set_operations_menu():
     while True:
-        table_name = select_table()
-        print("please select the second table you wish to perform set operations on:")
-        second_table = select_table()
+
         print("\n===== Set Operations Menu =====")
         print("1. Union")
         print("2. Intersection")
@@ -158,30 +156,32 @@ def set_operations_menu():
         print("4. Back to Advanced Operations Menu")
         choice = input("Enter your choice: ")
 
-        if choice == "1":
-            # Perform Union
-            print("\nPerforming Union Operation:")
-            print(perform_union(db_connection, table_name, second_table))
-        
-        elif choice == "2":
-            # Perform Intersection
-            print("\nPerforming Intersection Operation:")
-            print(perform_intersect(db_connection, table_name, second_table))
-        
-        elif choice == "3":
-            # Perform Difference
-            print("\nPerforming Difference Operation:")
-            print(perform_except(db_connection, table_name, second_table))
-        
-        elif choice == "4":
+        if choice == "4":
             break
-        
         else:
-            print("Invalid choice. Please select a valid option.")
+            table_name = select_table()
+            print("please select the second table you wish to perform set operations on:")
+            second_table = select_table()
+            if choice == "1":
+                # Perform Union
+                print("\nPerforming Union Operation:")
+                print(perform_union(db_connection, table_name, second_table))
+            
+            elif choice == "2":
+                # Perform Intersection
+                print("\nPerforming Intersection Operation:")
+                print(perform_intersect(db_connection, table_name, second_table))
+            
+            elif choice == "3":
+                # Perform Difference
+                print("\nPerforming Difference Operation:")
+                print(perform_except(db_connection, table_name, second_table))
+        
+            else:
+                print("Invalid choice. Please select a valid option.")
 
 def set_membership_menu():
     while True:
-        table_name = select_table()
         print("\n===== Set Membership Menu =====")
         print("1. IN Membership Check")
         print("2. EXISTS Membership Check")
@@ -190,6 +190,7 @@ def set_membership_menu():
 
         if choice == "1":
             # IN Membership Check
+            table_name = select_table()
             print("\nPerforming IN Membership Check:")
             column = input("Enter the column to check: ")
             value = input("Enter the value to check: ")
@@ -197,6 +198,7 @@ def set_membership_menu():
             print_records(records)  # Display or process the membership check results as needed
         
         elif choice == "2":
+            table_name = select_table()
             # EXISTS Membership Check
             print("\nPerforming EXISTS Membership Check:")
             condition = input("Enter the condition to check: ")
@@ -211,7 +213,6 @@ def set_membership_menu():
 
 def set_comparison_menu():
     while True:
-        table_name = select_table()
         print("\n===== Set Comparison Menu =====")
         print("1. Less Than Comparison")
         print("2. Greater Than Comparison")
@@ -221,6 +222,7 @@ def set_comparison_menu():
 
         if choice == "1":
             # Less Than Comparison
+            table_name = select_table()
             print("\nPerforming Less Than Comparison:")
             column = input("Enter the column to compare: ")
             threshold = input("Enter the threshold value: ")
@@ -229,6 +231,7 @@ def set_comparison_menu():
         
         elif choice == "2":
             # Greater Than Comparison
+            table_name = select_table()
             print("\nPerforming Greater Than Comparison:")
             column = input("Enter the column to compare: ")
             threshold = input("Enter the threshold value: ")
@@ -237,6 +240,7 @@ def set_comparison_menu():
         
         elif choice == "3":
             # Equal To Comparison
+            table_name = select_table()
             print("\nPerforming Equal To Comparison:")
             column = input("Enter the column to compare: ")
             value = input("Enter the value to compare: ")
@@ -263,7 +267,7 @@ def subqueries_menu():
             records = run_custom_query(db_connection, query)
             print_records(records)
 
-        if choice == "2":
+        elif choice == "2":
             query = ("WITH RankedType AS ( SELECT distinct Type, dense_rank() OVER (ORDER BY Type DESC) AS Type_Rank "
                    "FROM traffic_violations) SELECT Type FROM RankedType WHERE Type_Rank <= 3;")
             records = run_custom_query(db_connection, query)
@@ -299,7 +303,7 @@ def aggregate_functions_menu():
             print_records(records)
 
         elif choice == "3":
-            query = ("    SELECT C.city_name,R.RoadType,R.Road_name, sum(TII.incidentid) as Total_incidents from City C "
+            query = ("SELECT C.city_name,R.RoadType,R.Road_name, sum(TII.incidentid) as Total_incidents from City C "
                     " JOIN Road R on R.cityid=C.cityid  JOIN traffic_incidents TI on R.Roadid=TI.Roadid "
                     " JOIN Traffic_Incidents TII on R.Roadid=TII.Roadid Group by C.City_name,R.RoadType,R.Road_name with rollup;")
             records = run_custom_query(db_connection, query)
